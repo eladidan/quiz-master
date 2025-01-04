@@ -1,8 +1,8 @@
 using UnityEngine;
 using TMPro;
 public class Score : MonoBehaviour {
-    public int score = 0;
-    public int maxScore = 0;
+    int score = 0;
+    int maxScore = 0;
 
     [SerializeField]
     TextMeshProUGUI scoreText;
