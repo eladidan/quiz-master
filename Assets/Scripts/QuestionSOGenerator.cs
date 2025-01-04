@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Linq;
 
 public static class QuestionSOGenerator {
-    public static async Task<QuestionSO[]> GenerateQuestions(int numberOfQuestions, Category category, Difficulty difficulty) {
+    public static async Task<List<QuestionSO>> GenerateQuestions(int numberOfQuestions, Category category, Difficulty difficulty) {
         var api = new OpenTriviaAPI();
         await api.StartSession();
 
@@ -24,6 +25,6 @@ public static class QuestionSOGenerator {
             questionSO.Initialize(q.question, shuffledAnswers, correctIndex);
 
             return questionSO;
-        }).ToArray();
+        }).ToList();
     }
 }
