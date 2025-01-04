@@ -26,6 +26,10 @@ public class Quiz : MonoBehaviour {
     [SerializeField]
     Sprite correctAnswerSprite;
 
+    [Header("Progress Bar")]
+    [SerializeField]
+    Slider progressBar;
+
 
     Timer timer;
 
@@ -49,6 +53,9 @@ public class Quiz : MonoBehaviour {
         answerButtons = GameObject.Find("AnswerButtonGroup").GetComponentsInChildren<Button>();
         defaultAnswerSprite = Resources.Load<Sprite>("Sprites/neon_square_blue");
         correctAnswerSprite = Resources.Load<Sprite>("Sprites/neon_square_orange");
+        progressBar = GameObject.Find("ProgressSlider").GetComponent<Slider>();
+        progressBar.maxValue = questions.Count;
+        incrementProgressBar();
         DisplayQuestion();
     }
 
@@ -96,9 +103,14 @@ public class Quiz : MonoBehaviour {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         }
+        incrementProgressBar();
         ToggleAnswerButtons(true);
         DisplayQuestion();
         timer.startTimerAnswering();
+    }
+
+    void incrementProgressBar() {
+        progressBar.value = currentQuestionIndex + 1;
     }
 
 
